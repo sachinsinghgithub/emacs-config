@@ -1,5 +1,8 @@
 (setq-default indent-tabs-mode nil)
 (global-linum-mode 1)
+(ido-mode 1)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
 
 (require 'package)
 (add-to-list 'package-archives
@@ -38,4 +41,3 @@
 
 (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
 (add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
-
