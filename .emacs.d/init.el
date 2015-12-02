@@ -1,4 +1,5 @@
 (setq-default indent-tabs-mode nil)
+(global-linum-mode 1)
 
 (require 'package)
 (add-to-list 'package-archives
