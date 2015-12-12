@@ -14,6 +14,7 @@
     ensime
     yaml-mode
     go-mode
+    haskell-mode
     ) "A list of packages to install on startup)")
 
 (require 'cl)
