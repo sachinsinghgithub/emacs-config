@@ -20,7 +20,10 @@
     ensime
     yaml-mode
     go-mode
+    go-autocomplete
     haskell-mode
+    ghc
+    company-ghc
     ) "A list of packages to install on startup)")
 
 (require 'cl)
@@ -36,15 +39,44 @@
   (message "%s" " done.")
   (dolist (p required-packages)
     (when (not (package-installed-p p))
-                  (package-install p))))
+      (package-install p))))
 
 (require 'yaml-mode)
-    (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+;; Golang
 
 (require 'go-mode-autoloads)
+
+(defun auto-complete-for-go ()
+(auto-complete-mode 1))
+ (add-hook 'go-mode-hook 'auto-complete-for-go)
+
+(with-eval-after-load 'go-mode
+  (require 'go-autocomplete))
+
+;; Scala
 
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
+;; Haskell
+
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+
+;; Groovy
+
 (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
 (add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
+
+;; Customize
+
+(custom-set-variables
+ '(haskell-tags-on-save t)
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(custom-enabled-themes (quote (tango-dark))))
+(custom-set-faces
+ )
